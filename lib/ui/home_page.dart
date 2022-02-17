@@ -1,43 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:task_mobile/components/generic_float_button.dart';
 import 'package:task_mobile/models/task_manager/task_manager.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int value = 0;
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            setState(() {
-              value = value + 1;
-            });
-            print("$value");
-          },
-          child: Text("$value"),
-        ),
-        appBar: AppBar(
-          title: Text("Home Page"),
-        ),
-        body: Center(
-          child: Card(
-            elevation: 10,
-            child: SizedBox(
-              height: 200,
-              width: 200,
-              child: Row(
-                children: [Text("Texto 1"), Text("Texto 1"), Text("Texto 1")],
+      floatingActionButton: GenericFloatButton(),
+      body: Column(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: Image.asset("assets/db1_logo.png")),
+              Text(
+                "Task - Mobile",
+                style: TextStyle(color: Colors.blue),
               ),
-            ),
+            ],
           ),
-        ));
+          SizedBox(
+            height: 15,
+          ),
+          Text("Olá, seja bem-vindo Pedro!"),
+          SizedBox(
+            height: 15,
+          ),
+          Row(
+            children: [
+              Card(
+                child: SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: Column(
+                    children: [Text("20"), Text("Task ativas")],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Card(
+                child: SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: Column(
+                    children: [Text("20"), Text("Task ativas")],
+                  ),
+                ),
+              )
+            ],
+          )
+        ],
+      ),
+    );
   }
 }

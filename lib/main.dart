@@ -31,11 +31,13 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const SplashScreen(),
+        initialRoute: "/splash",
         onGenerateRoute: (settings) {
           switch (settings.name) {
             case "/home":
               return MaterialPageRoute(builder: (_) => HomePage());
+            case "/splah":
+              return MaterialPageRoute(builder: (_) => const SplashScreen());
           }
         },
       ),
