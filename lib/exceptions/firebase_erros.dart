@@ -1,5 +1,5 @@
 String getErrorString(String code) {
-  switch (code) {
+  switch (code.toUpperCase()) {
     case 'ERROR_WEAK_PASSWORD':
       return 'Sua senha é muito fraca.';
     case 'ERROR_INVALID_EMAIL':
@@ -11,6 +11,8 @@ String getErrorString(String code) {
     case 'ERROR_WRONG_PASSWORD':
       return 'Sua senha está incorreta.';
     case 'ERROR_USER_NOT_FOUND':
+      return 'Não há usuário com este e-mail.';
+    case 'USER-NOT-FOUND':
       return 'Não há usuário com este e-mail.';
     case 'ERROR_USER_DISABLED':
       return 'Este usuário foi desabilitado.';

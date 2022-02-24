@@ -6,7 +6,7 @@ class UserData {
   late String name, email, password, id;
 
   UserData.fromDocument(DocumentSnapshot document) {
-    id = document.get("id") as String;
+    id = document.id;
     name = document.get("name") as String;
     email = document.get("email") as String;
   }

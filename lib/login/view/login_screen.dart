@@ -33,6 +33,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    //
     return Scaffold(body: Consumer<UserManager>(
       builder: (_, userManager, __) {
         return Padding(
@@ -154,18 +155,18 @@ class _LoginState extends State<Login> {
                       ),
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
-                          // userManager.signIn(
-                          //     user: UserData(
-                          //         email: _emailController.text,
-                          //         password: _passwordController.text),
-                          //     onFail: (e) {
-                          //       ScaffoldMessenger.of(context).showSnackBar(
-                          //           SnackBar(content: Text("Ops! $e")));
-                          //     },
-                          //     onSucess: () {
-                          //       Navigator.pushNamed(context, "/home");
-                          //     });
-                          Navigator.pushNamed(context, "/home");
+                          context.read<UserManager>().context = context;
+                          userManager.signIn(
+                              user: UserData(
+                                  email: _emailController.text.trim(),
+                                  password: _passwordController.text.trim()),
+                              onFail: (e) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text("Ops! $e")));
+                              }
+
+                              // Navigator.pushNamed(context, "/home");
+                              );
                         }
                       },
                     ),

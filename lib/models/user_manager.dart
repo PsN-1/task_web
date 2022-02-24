@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/change_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,22 +17,33 @@ class UserManager extends ChangeNotifier {
   bool _loading = false;
   bool get loading => _loading;
 
+  late BuildContext _routeSelectedContext;
+  BuildContext get context => _routeSelectedContext;
+
+  set context(BuildContext ctx) {
+    _routeSelectedContext = ctx;
+    notifyListeners();
+  }
+
   UserManager() {
-    signOut();
+    _loadingCurrentUser();
   }
 
   Future<void> signIn(
-      {required UserData user, required Function onFail, onSucess}) async {
+      {required UserData user, required Function onFail}) async {
     _loading = true;
     notifyListeners();
 
+    print(user.password);
+    print(user.email);
     try {
-      UserCredential result = await auth.signInWithEmailAndPassword(
-          email: user.email, password: user.password);
+      await auth.signInWithEmailAndPassword(
+          email: user.email.trim(), password: user.password);
 
-      await _loadingCurrentUser(firebaseUser: result.user);
-      onSucess();
+      await _loadingCurrentUser();
+      Navigator.pushNamed(context, "/home");
     } on FirebaseAuthException catch (e, s) {
+      print(e.code);
       onFail(getErrorString(e.code));
     }
 
@@ -42,9 +54,12 @@ class UserManager extends ChangeNotifier {
   Future<void> _loadingCurrentUser({User? firebaseUser}) async {
     User currentUser = await auth.currentUser!;
     final DocumentSnapshot docUser =
-        await firestore.collection("Employees").doc(firebaseUser!.uid).get();
+        await firestore.collection("Employees").doc(currentUser.uid).get();
 
-    _user = UserData.fromDocument(docUser);
+    if (docUser.exists) {
+      _user = UserData.fromDocument(docUser);
+    }
+
     notifyListeners();
 
     if (kDebugMode) {
@@ -55,7 +70,10 @@ class UserManager extends ChangeNotifier {
     notifyListeners();
   }
 
-  void signOut() {}
+  Future<void> signOut() async {
+    await auth.signOut();
+    Navigator.pushNamed(context, "/login");
+  }
 
   Future<void> loadTask() async {
     Stream collectionStream =
