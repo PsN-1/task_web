@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:task_mobile/components/card_task_widget.dart';
 import 'package:task_mobile/components/generic_float_button.dart';
 import 'package:task_mobile/models/task_manager/task_manager.dart';
 
@@ -76,45 +77,13 @@ class HomePage extends StatelessWidget {
               SizedBox(
                 height: 40,
               ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    Card(
-                      child: SizedBox(
-                          width: 300,
-                          height: 200,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Spacer(),
-                              Text("Codigo: 001"),
-                              Spacer(),
-                              Text("Projeto: IT_OMNI"),
-                              Text("Descrição: Integrar Login"),
-                              Spacer(),
-                            ],
-                          )),
-                    ),
-                    Card(
-                      child: SizedBox(
-                          width: 300,
-                          height: 200,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Spacer(),
-                              Text("Codigo: 002"),
-                              Spacer(),
-                              Text("Projeto: IT_OMNI"),
-                              Text("Descrição: Integrar Tela Home"),
-                              Spacer(),
-                            ],
-                          )),
-                    ),
-                  ],
-                ),
-              )
+              ListView.builder(
+                  itemCount: taskManager.taskData.length,
+                  itemBuilder: (_, index) {
+                    return CardTaskWidget(
+                      taskData: taskManager.taskData[index],
+                    );
+                  })
             ],
           ),
         ),
