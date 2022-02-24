@@ -35,4 +35,20 @@ class TaskManager extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  addTask({required TaskData data, required BuildContext context}) async {
+    User currentUser = await _auth.currentUser!;
+
+    await FirebaseFirestore.instance.collection("Tasks").add({
+      "cod": data.cod,
+      "description": data.description,
+      "done": false,
+      "idEmployer": currentUser.uid,
+      "image": "url",
+      "project": data.project
+    });
+    notifyListeners();
+    await getTask();
+    Navigator.pushNamed(context, "/home");
+  }
 }

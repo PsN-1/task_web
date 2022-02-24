@@ -10,8 +10,11 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<TaskManager>(builder: (_, taskManager, __) {
+      double heightDevice = MediaQuery.of(context).size.height;
       return Scaffold(
-        floatingActionButton: GenericFloatButton(),
+        floatingActionButton: GenericFloatButton(onPressed: () {
+          Navigator.pushNamed(context, "/new-task");
+        }),
         body: SafeArea(
           child: Column(
             children: [
@@ -22,17 +25,17 @@ class HomePage extends StatelessWidget {
                       width: 100,
                       height: 100,
                       child: Image.asset("assets/db1_logo.png")),
-                  Text(
+                  const Text(
                     "Task - Mobile",
                     style: TextStyle(color: Colors.blue),
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
-              Text("Olá, seja bem-vindo Pedro!"),
-              SizedBox(
+              const Text("Olá, seja bem-vindo Pedro!"),
+              const SizedBox(
                 height: 15,
               ),
               Row(
@@ -47,13 +50,13 @@ class HomePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text("${taskManager.taskCountActive}"),
-                            Text("Task ativas")
+                            const Text("Task ativas")
                           ],
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Expanded(
@@ -66,7 +69,7 @@ class HomePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text("${taskManager.tasksCountDone}"),
-                            Text("Task finalizadas")
+                            const Text("Task finalizadas")
                           ],
                         ),
                       ),
@@ -74,16 +77,20 @@ class HomePage extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
-              ListView.builder(
-                  itemCount: taskManager.taskData.length,
-                  itemBuilder: (_, index) {
-                    return CardTaskWidget(
-                      taskData: taskManager.taskData[index],
-                    );
-                  })
+              SizedBox(
+                height: heightDevice * 0.5,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: taskManager.taskData.length,
+                    itemBuilder: (_, index) {
+                      return CardTaskWidget(
+                        taskData: taskManager.taskData[index],
+                      );
+                    }),
+              )
             ],
           ),
         ),

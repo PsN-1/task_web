@@ -6,6 +6,7 @@ import 'package:task_mobile/models/task_manager/task_manager.dart';
 import 'package:task_mobile/models/user_manager.dart';
 import 'package:task_mobile/splash/splash_screen.dart';
 import 'package:task_mobile/ui/home_page.dart';
+import 'package:task_mobile/ui/new_task/new_task_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,6 +44,8 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(builder: (_) => const SplashScreen());
             case "/login":
               return MaterialPageRoute(builder: (_) => Login());
+            case "/new-task":
+              return MaterialPageRoute(builder: (_) => NewTaskPage());
           }
         },
       ),
