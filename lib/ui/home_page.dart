@@ -71,25 +71,44 @@ class HomePage extends StatelessWidget {
             SizedBox(
               height: 40,
             ),
-            Row(
-              children: [
-                Card(
-                  child: SizedBox(
-                      width: 300,
-                      height: 200,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Spacer(),
-                          Text("Codigo: 001"),
-                          Spacer(),
-                          Text("Projeto: IT_OMNI"),
-                          Text("Descrição: Integrar Login"),
-                          Spacer(),
-                        ],
-                      )),
-                ),
-              ],
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  Card(
+                    child: SizedBox(
+                        width: 300,
+                        height: 200,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Spacer(),
+                            Text("Codigo: 001"),
+                            Spacer(),
+                            Text("Projeto: IT_OMNI"),
+                            Text("Descrição: Integrar Login"),
+                            Spacer(),
+                          ],
+                        )),
+                  ),
+                  Card(
+                    child: SizedBox(
+                        width: 300,
+                        height: 200,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Spacer(),
+                            Text("Codigo: 002"),
+                            Spacer(),
+                            Text("Projeto: IT_OMNI"),
+                            Text("Descrição: Integrar Tela Home"),
+                            Spacer(),
+                          ],
+                        )),
+                  ),
+                ],
+              ),
             )
           ],
         ),
