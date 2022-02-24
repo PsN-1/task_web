@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +33,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Consumer(
+    return Scaffold(body: Consumer<UserManager>(
       builder: (_, userManager, __) {
         return Padding(
           padding: const EdgeInsets.only(top: 60.0),
@@ -90,6 +91,10 @@ class _LoginState extends State<Login> {
                             ),
                             autocorrect: false,
                             obscureText: true,
+                            validator: (password) {
+                              if (password!.length <= 5)
+                                return "Senha Invalida";
+                            },
                           ),
                         ],
                       )),
@@ -148,7 +153,20 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.pushNamed(context, "/home");
+                        if (formKey.currentState!.validate()) {
+                          // userManager.signIn(
+                          //     user: UserData(
+                          //         email: _emailController.text,
+                          //         password: _passwordController.text),
+                          //     onFail: (e) {
+                          //       ScaffoldMessenger.of(context).showSnackBar(
+                          //           SnackBar(content: Text("Ops! $e")));
+                          //     },
+                          //     onSucess: () {
+                          //       Navigator.pushNamed(context, "/home");
+                          //     });
+                          Navigator.pushNamed(context, "/home");
+                        }
                       },
                     ),
                   ),

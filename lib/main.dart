@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
           switch (settings.name) {
             case "/home":
               return MaterialPageRoute(builder: (_) => HomePage());
-            case "/splah":
+            case "/splash":
               return MaterialPageRoute(builder: (_) => const SplashScreen());
           }
         },

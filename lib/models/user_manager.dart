@@ -8,12 +8,11 @@ import 'package:task_mobile/exceptions/firebase_erros.dart';
 import 'package:task_mobile/models/user_data.dart';
 
 class UserManager extends ChangeNotifier {
-
-   final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final FirebaseAuth auth = FirebaseAuth.instance;
   late final UserData _user;
   UserData get user => _user;
-  
+
   bool _loading = false;
   bool get loading => _loading;
 
@@ -21,12 +20,13 @@ class UserManager extends ChangeNotifier {
     signOut();
   }
 
-  Future<void> signIn({required UserData user, required Function onFail, onSucess}) async {
-
+  Future<void> signIn(
+      {required UserData user, required Function onFail, onSucess}) async {
     _loading = true;
+    notifyListeners();
 
     try {
-      UserCredential  result = await auth.signInWithEmailAndPassword(
+      UserCredential result = await auth.signInWithEmailAndPassword(
           email: user.email, password: user.password);
 
       await _loadingCurrentUser(firebaseUser: result.user);
@@ -34,39 +34,31 @@ class UserManager extends ChangeNotifier {
     } on FirebaseAuthException catch (e, s) {
       onFail(getErrorString(e.code));
     }
-    
+
     _loading = false;
     notifyListeners();
-
   }
-  
-  Future<void> _loadingCurrentUser({User? firebaseUser}) async {
 
+  Future<void> _loadingCurrentUser({User? firebaseUser}) async {
     User currentUser = await auth.currentUser!;
-    final DocumentSnapshot docUser = await firestore
-        .collection("Colaboradores")
-        .doc(currentUser.uid)
-        .get();
+    final DocumentSnapshot docUser =
+        await firestore.collection("Employees").doc(firebaseUser!.uid).get();
 
     _user = UserData.fromDocument(docUser);
     notifyListeners();
 
     if (kDebugMode) {
-      print("sem nada "+ currentUser.email!);
+      print("sem nada " + currentUser.email!);
       print(_user.name);
     }
 
-
     notifyListeners();
   }
+
   void signOut() {}
 
   Future<void> loadTask() async {
-    Stream collectionStream = FirebaseFirestore.instance.collection('users').snapshots();
-
-    
-
+    Stream collectionStream =
+        FirebaseFirestore.instance.collection('users').snapshots();
   }
-
-  
 }
