@@ -10,19 +10,52 @@ class CardTaskWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 6,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: SizedBox(
-          width: 300,
+          width: 250,
           height: 200,
           child: Column(
             children: [
-              Spacer(),
-              Text("Codigo: ${taskData.cod}"),
-              Spacer(),
-              Text("Projeto: ${taskData.project}"),
-              Text("Descrição: ${taskData.description}"),
-              Spacer(),
+              const Spacer(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "Codigo: ",
+                    style: TextStyle(fontStyle: FontStyle.italic),
+                  ),
+                  Text(
+                    "${taskData.cod}",
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 15),
+                  ),
+                ],
+              ),
+              const Spacer(),
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                const Text(
+                  "Projeto: ",
+                  style: TextStyle(fontStyle: FontStyle.italic),
+                ),
+                Text(
+                  taskData.project,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 15),
+                )
+              ]),
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                const Text(
+                  "Descrição: ",
+                  style: TextStyle(fontStyle: FontStyle.italic),
+                ),
+                Text(
+                  taskData.description,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 15),
+                )
+              ]),
+              const Spacer(),
             ],
           )),
     );

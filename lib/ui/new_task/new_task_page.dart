@@ -18,16 +18,18 @@ class NewTaskPage extends StatelessWidget {
                         image: AssetImage("assets/fundo_colors.png"),
                         fit: BoxFit.cover)),
                 child: null),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.75,
-              child: PageView(
-                // physics: const NeverScrollableScrollPhysics(),
-                controller: _pageController,
-                children: [
-                  FormsPage(),
-                  FormsPage(),
-                  
-                ],
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 5),
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height * 0.6,
+                child: PageView(
+                  // physics: const NeverScrollableScrollPhysics(),
+                  controller: _pageController,
+                  children: [
+                    FormsPage(),
+                    FormsPage(),
+                  ],
+                ),
               ),
             )
           ],
