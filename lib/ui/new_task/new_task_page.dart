@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_mobile/ui/new_task/pages/creation_done.dart';
 import 'package:task_mobile/ui/new_task/pages/forms_page.dart';
 
 class NewTaskPage extends StatelessWidget {
@@ -25,7 +26,7 @@ class NewTaskPage extends StatelessWidget {
                 controller: _pageController,
                 children: [
                   FormsPage(),
-                  FormsPage(),
+                  CreationDonePage()
                   
                 ],
               ),

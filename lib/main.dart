@@ -23,12 +23,12 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           lazy: true,
-          create: (_) => UserManager(),
+          create: (_) => TaskManager(),
         ),
         ChangeNotifierProvider(
           lazy: true,
-          create: (_) => TaskManager(),
-        )
+          create: (_) => UserManager(),
+        ),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

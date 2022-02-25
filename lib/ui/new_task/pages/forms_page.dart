@@ -9,7 +9,7 @@ class FormsPage extends StatelessWidget {
   final TextEditingController _codController = TextEditingController();
   final TextEditingController _projectController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
-  late TaskData data;
+  late TaskData data = TaskData();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -39,6 +39,7 @@ class FormsPage extends StatelessWidget {
                             size: 22.0,
                           ),
                         ),
+                        keyboardType: TextInputType.number,
                         autocorrect: false,
                         validator: (email) {},
                       ),

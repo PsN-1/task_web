@@ -20,5 +20,8 @@ class TaskData {
     description = document.get("description");
   }
 
+  TaskData(){
+    
+  }
 // List<ItemVariation> variations;
 }

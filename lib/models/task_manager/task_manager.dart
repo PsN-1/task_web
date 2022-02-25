@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:task_mobile/models/task_data.dart';
 
 class TaskManager extends ChangeNotifier {
-  late List<TaskData> _taskData;
+  late List<TaskData> _taskData = [];
   List<TaskData> get taskData => _taskData;
   FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -45,10 +45,21 @@ class TaskManager extends ChangeNotifier {
       "done": false,
       "idEmployer": currentUser.uid,
       "image": "url",
-      "project": data.project
+      "project": data.project,
+      "title": data.project,
+      "timeStamp": Timestamp.now().microsecondsSinceEpoch
     });
     notifyListeners();
     await getTask();
     Navigator.pushNamed(context, "/home");
+  }
+
+  doneTask(TaskData data) async {
+    await FirebaseFirestore.instance
+        .collection("Tasks")
+        .doc(data.id)
+        .update({"done": true});
+    notifyListeners();
+    getTask();
   }
 }
