@@ -12,7 +12,7 @@ class CardTaskWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 6,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: SizedBox(
           width: 200,
